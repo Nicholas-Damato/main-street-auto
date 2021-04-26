@@ -31,6 +31,7 @@ class App extends Component {
   getVehicles() {
     // axios (GET)
     // setState with response -> vehiclesToDisplay
+    axios.get('https://joes-autos.herokuapp.com/api/vehicles').then(res => { this.setState({ vehiclesToDisplay: res.data }) }).catch(err => { err })
   }
 
   getPotentialBuyers() {
@@ -41,6 +42,7 @@ class App extends Component {
   sellCar(id) {
     // axios (DELETE)
     // setState with response -> vehiclesToDisplay
+    axios.delete(`https://joes-autos.herokuapp.com/api/vehicles/${id}`).then(res => { this.setState({ vehiclesToDisplay: res.data.vehicles }) }).catch(err => { err })
   }
 
   filterByMake() {
@@ -60,6 +62,7 @@ class App extends Component {
   updatePrice(priceChange, id) {
     // axios (PUT)
     // setState with response -> vehiclesToDisplay
+    axios.put(`https://joes-autos.herokuapp.com/api/vehicles/${id}/${priceChange}`).then(res => { this.setState({ vehiclesToDisplay: res.data.vehicles }) }).catch(err => { err })
   }
 
   addCar() {
@@ -73,6 +76,12 @@ class App extends Component {
 
     // axios (POST)
     // setState with response -> vehiclesToDisplay
+    axios.post(`https://joes-autos.herokuapp.com/api/vehicles`, newCar)
+      .then(res => {
+        this.setState({
+          vehiclesToDisplay: res.data.vehicles
+        })
+      }).catch(err => { err })
   }
 
   addBuyer() {
